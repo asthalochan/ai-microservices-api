@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: ai-microservice-api
+    env: python
+    plan: free
+    buildCommand: ""
+    startCommand: gunicorn main:app -k uvicorn.workers.UvicornWorker
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
