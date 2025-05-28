@@ -1,10 +1,12 @@
 services:
   - type: web
-    name: ai-microservice-api
-    env: python
-    plan: free
-    buildCommand: ""
-    startCommand: gunicorn main:app -k uvicorn.workers.UvicornWorker
+    name: fastapi-app
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port 10000
     envVars:
+      - key: PORT
+        value: 10000
       - key: OPENAI_API_KEY
-        sync: false
+    plan: free
+    autoDeploy: true
